@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 // load the port from .env
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // starts the server
 app.listen(port, ()=>{
