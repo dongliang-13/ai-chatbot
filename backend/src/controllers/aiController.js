@@ -9,23 +9,19 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
 const getAiResponse = async (req, res) => {
     try {
-        // Check if the request body contains the required 'request' property
-
         if (!req.query.request && !req.body.request) {
             return res.status(400).json({
                 response: "Please attach a request for the AI"
             });
         }
-        
         const prompt = req.query.request || req.body.request;
         
         let history = req.query.history || req.body.history || [];
         const chat = model.startChat({
             history: history
         });
-
         const result = await chat.sendMessage(prompt);
-        const text = await result.response.text();
+        const text = result.response.text();
 
         res.status(200).json({
             response: text
@@ -39,4 +35,10 @@ const getAiResponse = async (req, res) => {
     }
 };
 
-export { getAiResponse };
+const test = async(req, res) =>{
+    res.send({
+        data: "test is done"
+    })
+}
+
+export { getAiResponse, test };
